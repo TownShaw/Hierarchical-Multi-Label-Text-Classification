@@ -12,7 +12,7 @@ from collections import OrderedDict
 from pylab import *
 from texttable import Texttable
 from gensim.models import KeyedVectors
-from tflearn.data_utils import pad_sequences
+#from tflearn.data_utils import pad_sequences
 
 
 def _option(pattern):
@@ -380,7 +380,18 @@ def load_data_and_labels(args, input_file, word2idx: dict):
             Data['subgroup'].append(_create_onehot_labels(subgroup, args.num_classes_list[3]))
             Data['onehot_labels'].append(_create_onehot_labels(labels, args.total_classes))
             Data['labels'].append(labels)
-        Data['pad_seqs'] = pad_sequences(Data['content_index'], maxlen=args.pad_seq_len, value=0.)
+        #Data['pad_seqs'] = pad_sequences(Data['content_index'], maxlen=args.pad_seq_len, value=0.)
+        
+        # 下面进行截断/补全
+        for idx, content in enumerate(Data['content_index']):
+            if len(content) < args.pad_seq_len:
+                while len(content) < args.pad_seq_len:
+                    content.append(float(0))	# 补 0
+            elif len(content) > args.pad_seq_len:	# 截断
+                while len(content) > args.pad_seq_len:
+                    content.pop()
+            else:
+                pass
     return Data
 
 

@@ -14,7 +14,7 @@ def parameter_parser():
     parser.add_argument("--test-file", nargs="?", default="../data/Test_sample.json", help="Testing data.")
     parser.add_argument("--metadata-file", nargs="?", default="../data/metadata.tsv",
                         help="Metadata file for embedding visualization.")
-    parser.add_argument("--word2vec-file", nargs="?", default="../data/word2vec_100.kv",
+    parser.add_argument("--word2vec-file", nargs="?", default="../../Pytorch/data/word2vec_100.kv",
                         help="Word2vec file for embedding characters (the dim need to be the same as embedding dim).")
 
     # Model Hyperparameters
@@ -36,7 +36,7 @@ def parameter_parser():
 
     # Training Parameters
     parser.add_argument("--epochs", type=int, default=20, help="Number of training epochs.")
-    parser.add_argument("--batch-size", type=int, default=32, help="Batch Size.")
+    parser.add_argument("--batch-size", type=int, default=16, help="Batch Size.")
     parser.add_argument("--learning-rate", type=float, default=0.001, help="Learning rate.")
     parser.add_argument("--decay-rate", type=float, default=0.95, help="Rate of decay for learning rate.")
     parser.add_argument("--decay-steps", type=int, default=500, help="How many steps before decay learning rate.")
